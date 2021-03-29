@@ -36,7 +36,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
     valueFormat: ",d",
     valueUnit: "MB",
     disableBreadcrumb: false,
-    colorModel: ColorModel.NumberOfChildren,
+    colorModel: ColorModel.Value,
     onLeafClick: null
   };
 
