@@ -36,8 +36,9 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
     valueFormat: ",d",
     valueUnit: "MB",
     disableBreadcrumb: false,
-    colorModel: ColorModel.NumberOfChildren,
-    onLeafClick: null
+    colorModel: ColorModel.Value,
+    onLeafClick: null //,
+    //rectRadius: "0px"
   };
 
   // Note. This treemap element initially was using treemap and hierarchy directly on the render.
@@ -178,8 +179,8 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
     // 1. Create treemap structure
     this._treemap = d3treemap()
       .size([width, height])
-      .paddingOuter(3)
-      .paddingTop(19)
+      .paddingOuter(1)
+      .paddingTop(1)
       .paddingInner(1)
       .round(true);
 
@@ -312,6 +313,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
         valueUnit={this.props.valueUnit}
         hideNumberOfChildren={this.props.hideNumberOfChildren}
         hideValue={this.props.hideValue}
+        //rectRadius={rectRadius}
       />
     );
   }
