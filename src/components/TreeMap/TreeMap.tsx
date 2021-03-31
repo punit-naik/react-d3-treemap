@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import NodeContainer from "../NodeContainer/NodeContainer";
-// import NodeContainer from "../NodeContainer/NodeContainer.Animated";
 
 import { Utils } from "../../utils/Utils";
 import { format } from "d3-format";
@@ -18,9 +17,7 @@ import * as chromatic from "d3-scale-chromatic";
 import { interpolateHcl, interpolateHsl } from "d3-interpolate";
 import { IBreadcrumbItem, BreadcrumbStyled } from "../Breadcrumb/Breadcrumb";
 
-/* tslint:disable:no-var-requires */
 const styles: any = require("./TreeMap.module.css");
-/* tslint:enable:no-var-requires */
 
 import { ITreeMapProps, ColorModel } from "./ITreeMapProps";
 import { ITreeMapState } from "./ITreeMapState";
@@ -37,8 +34,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
     valueUnit: "MB",
     disableBreadcrumb: false,
     colorModel: ColorModel.Value,
-    onLeafClick: null //,
-    //rectRadius: "0px"
+    onLeafClick: null
   };
 
   // Note. This treemap element initially was using treemap and hierarchy directly on the render.
@@ -170,7 +166,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
         <svg className={styles.mainSvg} height={height} width={width}>
           {reactNodes}
         </svg>
-        {/*<div>Total items: {this.state.selectedNodeTotalNodes}  / {this.state.totalNodes}</div>*/}
+        {}
       </div>
     );
   }
@@ -313,7 +309,6 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
         valueUnit={this.props.valueUnit}
         hideNumberOfChildren={this.props.hideNumberOfChildren}
         hideValue={this.props.hideValue}
-        //rectRadius={rectRadius}
       />
     );
   }
