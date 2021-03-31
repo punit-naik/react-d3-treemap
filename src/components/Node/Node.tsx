@@ -67,7 +67,7 @@ class Node extends React.Component<INodeProps, {}> {
                     </text>
                 </a>
                 {!hideNumberOfChildren && this._getNumberOfItemsRect()}
-                <title>{label + "\nResults: " + valueWithFormat + ((valueUnit === "") ? "" : " ") + valueUnit + "\nChildren: " +  nodeTotalNodes + "/" + globalTotalNodes}</title>
+                <title>{label + "\nResults: " + valueWithFormat + ((valueUnit === "") ? "" : " ") + valueUnit + "\nChildren: " + nodeTotalNodes + "/" + globalTotalNodes}</title>
             </g>
         );
     }
@@ -98,9 +98,9 @@ class Node extends React.Component<INodeProps, {}> {
                 <g>
                     <rect
                         id={"rectNumberItems-" + name}
-                        x={width - itemsWidth - 2} 
+                        x={width - itemsWidth - 2}
                         y={2}
-                        width={itemsWidth} 
+                        width={itemsWidth}
                         height={itemsHeight}
                         fill={bgColor}
                         rx={"5px"}
@@ -140,7 +140,7 @@ class Node extends React.Component<INodeProps, {}> {
         if (hasChildren === true) {
             const fullLabel = hideValue ? label : label + "\xa0(" + valueWithFormat + ((valueUnit === "") ? "" : " ") + valueUnit + ")";
             return (
-                <tspan fontSize={fontSize} fill={textColor} dx={4} dy={fontSize} > 
+                <tspan fontSize={fontSize} fill={textColor} dx={4} dy={fontSize} >
                     {fullLabel}
                 </tspan>
             );
