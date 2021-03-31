@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import NodeContainer from "../NodeContainer/NodeContainer";
-// import NodeContainer from "../NodeContainer/NodeContainer.Animated";
 
 import { Utils } from "../../utils/Utils";
 import { format } from "d3-format";
@@ -18,9 +17,7 @@ import * as chromatic from "d3-scale-chromatic";
 import { interpolateHcl, interpolateHsl } from "d3-interpolate";
 import { IBreadcrumbItem, BreadcrumbStyled } from "../Breadcrumb/Breadcrumb";
 
-/* tslint:disable:no-var-requires */
 const styles: any = require("./TreeMap.module.css");
-/* tslint:enable:no-var-requires */
 
 import { ITreeMapProps, ColorModel } from "./ITreeMapProps";
 import { ITreeMapState } from "./ITreeMapState";
@@ -36,7 +33,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
     valueFormat: ",d",
     valueUnit: "MB",
     disableBreadcrumb: false,
-    colorModel: ColorModel.NumberOfChildren,
+    colorModel: ColorModel.Value,
     onLeafClick: null
   };
 
@@ -169,7 +166,7 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
         <svg className={styles.mainSvg} height={height} width={width}>
           {reactNodes}
         </svg>
-        {/*<div>Total items: {this.state.selectedNodeTotalNodes}  / {this.state.totalNodes}</div>*/}
+        {}
       </div>
     );
   }
@@ -178,8 +175,8 @@ class TreeMap extends React.Component<ITreeMapProps, ITreeMapState> {
     // 1. Create treemap structure
     this._treemap = d3treemap()
       .size([width, height])
-      .paddingOuter(3)
-      .paddingTop(19)
+      .paddingOuter(1)
+      .paddingTop(1)
       .paddingInner(1)
       .round(true);
 

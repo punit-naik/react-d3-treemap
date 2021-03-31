@@ -1,8 +1,6 @@
 import * as React from "react";
 
-/* tslint:disable:no-var-requires */
 const styles: any = require("./Node.module.css");
-/* tslint:enable:no-var-requires */
 
 import { INodeProps } from "./INodeProps";
 
@@ -45,7 +43,6 @@ class Node extends React.Component<INodeProps, {}> {
                 className={styles.node + " " + (nodeTotalNodes === globalTotalNodes ? styles.rootNode : null)}
                 id={id.toString()}
                 onClick={(e) => hasChildren ? onClick(e) : onLeafClick(e, label)}
-                style={{ cursor }}
             >
                 <rect
                     id={"rect-" + id}
@@ -57,8 +54,9 @@ class Node extends React.Component<INodeProps, {}> {
                     id={"clip-".concat(treemapId, "-" , id.toString())}
                 >
                     <rect
-                        width={Math.max(0, clipWidth - 5)}
+                        width={width} 
                         height={height}
+                        fill={bgColor} 
                     />
                 </clipPath>
                 <a href={url} target="_blank">
@@ -69,7 +67,7 @@ class Node extends React.Component<INodeProps, {}> {
                     </text>
                 </a>
                 {!hideNumberOfChildren && this._getNumberOfItemsRect()}
-                <title>{label + "\n" + valueWithFormat + ((valueUnit === "") ? "" : " ") + valueUnit + "\n" + nodeTotalNodes + "/" + globalTotalNodes}</title>
+                <title>{label + "\nResults: " + valueWithFormat + ((valueUnit === "") ? "" : " ") + valueUnit + "\nChildren: " + nodeTotalNodes + "/" + globalTotalNodes}</title>
             </g>
         );
     }
@@ -93,6 +91,7 @@ class Node extends React.Component<INodeProps, {}> {
         } = this.props;
         const itemsWidth = this._getNumberItemsWidthByNumberOfChars(fontSize, nodeTotalNodes.toString().length);
         const itemsHeight = this._getNumberItemsHeightByFontSize(fontSize);
+
         if (width > itemsWidth
             && height > itemsHeight) {
             return (
@@ -104,17 +103,15 @@ class Node extends React.Component<INodeProps, {}> {
                         width={itemsWidth}
                         height={itemsHeight}
                         fill={bgColor}
+                        rx={"5px"}
                         fillOpacity={0.9}
                         stroke={textColor}
-                        // strokeDasharray={"0, " + (itemsWidth + itemsHeight) + ", " + (itemsWidth + itemsHeight)}
                     />
                     <text
                         fontSize={fontSize}
                         fill={textColor}
-                        x={width - itemsWidth}
-                        y={fontSize}
-                        // alignmentBaseline="hanging"
-                        // textAnchor="start"
+                        x={width - itemsWidth} 
+                        y={fontSize} 
                     >
                         {nodeTotalNodes}
                     </text>
@@ -126,6 +123,8 @@ class Node extends React.Component<INodeProps, {}> {
 
     private _getLabelNewLine() {
         const {
+            height,
+            width,
             label,
             textColor,
             fontSize,
@@ -135,8 +134,9 @@ class Node extends React.Component<INodeProps, {}> {
             nodeTotalNodes,
             globalTotalNodes,
             hideValue
-         } = this.props;
-
+        } = this.props;
+        const itemsWidth = this._getNumberItemsWidthByNumberOfChars(fontSize, nodeTotalNodes.toString().length);
+        const itemsHeight = this._getNumberItemsHeightByFontSize(fontSize);
         if (hasChildren === true) {
             const fullLabel = hideValue ? label : label + "\xa0(" + valueWithFormat + ((valueUnit === "") ? "" : " ") + valueUnit + ")";
             return (
@@ -147,13 +147,12 @@ class Node extends React.Component<INodeProps, {}> {
         } else {
             if (label) {
                 const fullLabel = hideValue ? label.split(/(?=[A-Z][^A-Z])/g) : label.split(/(?=[A-Z][^A-Z])/g).concat("(" + valueWithFormat + ((valueUnit === "") ? "" : " ") + valueUnit + ")");
-                return fullLabel.map((item, index) => {
                     return (
-                        <tspan fontSize={fontSize} fill={textColor} key={index} x={4} dy={fontSize} >
-                            {item}
+                        <tspan fontSize={fontSize} fill={textColor} dx={4} dy={fontSize} >
+                            {fullLabel}
                         </tspan>
                     );
-                });
+               
             }
         }
     }

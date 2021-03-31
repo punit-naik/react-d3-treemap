@@ -22,6 +22,7 @@ export interface ITreeMapProps {
     /*
      * Create and interpolates a background color range
      */
+    rectRadius?: string;
     bgColorRangeLow?: string;
     bgColorRangeHigh?: string;
 
